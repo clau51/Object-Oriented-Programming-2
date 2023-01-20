@@ -9,20 +9,25 @@ namespace sdds
 {
    class FoodOrder
    {
-      char m_name[9 + 1];
-      char m_description[24 + 1];
-      double m_price;
-      char m_onSpecial;
+      char m_name[9 + 1]{};
+      char* m_description{};
+      double m_price{};
+      bool m_onSpecial{};
+
       void setEmpty();
       bool isEmpty()const;
+      FoodOrder& deallocate();
+      operator bool()const;
    public:
-      FoodOrder();
+      FoodOrder() = default;
+      FoodOrder(const FoodOrder& foodOrder);
+      ~FoodOrder();
+      FoodOrder& operator=(const FoodOrder& foodOrder);
       std::istream& read(std::istream& istr = std::cin);
       std::ostream& display(std::ostream& ostr = std::cout)const;
    };
 }
 #endif
-
 
 
 

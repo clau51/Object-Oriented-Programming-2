@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <string>
+#include <cstring>
 #include "foodorder.h"
 
 double g_taxrate = 0;
@@ -10,10 +11,10 @@ namespace sdds
 {
    void FoodOrder::setEmpty()
    {
+      m_description = nullptr;
       m_name[0] = '\0';
-      m_description[0] = '\0';
       m_price = 0.0;
-      m_onSpecial = 'N';
+      m_onSpecial = false;
    }
 
    bool FoodOrder::isEmpty()const
@@ -21,36 +22,83 @@ namespace sdds
       return !m_name[0];
    }
 
-   FoodOrder::FoodOrder()
+   FoodOrder::operator bool() const
    {
-      m_name[0] = '\0';
-      m_description[0] = '\0';
-      m_price = 0.0;
-      m_onSpecial = 'N';
+      return m_name[0];
+   }
+
+   FoodOrder& FoodOrder::deallocate()
+   {
+      delete[] m_description;
+      m_description = nullptr;
+
+      return *this;
+   }
+
+   FoodOrder::~FoodOrder()
+   {
+      delete[] m_description;
+   }
+
+   FoodOrder::FoodOrder(const FoodOrder& foodOrder)
+   {
+      *this = foodOrder;
+   }
+
+   FoodOrder& FoodOrder::operator=(const FoodOrder& foodOrder)
+   {
+      if (this != &foodOrder)
+      {
+         if (foodOrder)
+         {
+            deallocate();
+
+            strcpy(m_name, foodOrder.m_name);
+            m_description = new char[strlen(foodOrder.m_description) + 1];
+            strcpy(m_description, foodOrder.m_description);
+            m_price = foodOrder.m_price;
+            m_onSpecial = foodOrder.m_onSpecial;
+         }
+      }
+
+      return *this;
    }
 
    std::istream& FoodOrder::read(std::istream& istr)
    {
+      string description;
       if (istr)
       {
          istr.getline(m_name, 10, ',');
-         istr.getline(m_description, 25, ',');
+
+         getline(istr, description, ','); 
+         deallocate();
+         m_description = new char[description.length() + 1];
+         strcpy(m_description, description.c_str());
+
          istr >> m_price;
          istr.ignore();
-         istr >> m_onSpecial;
-         istr.ignore(1000, '\n');
 
-         if (!(m_price >= 0))
+         char tempSpecial = istr.get();
+         if (tempSpecial == 'Y')
          {
-            setEmpty();
+            m_onSpecial = true;
          }
+         else if (tempSpecial == 'N')
+         {
+            m_onSpecial = false;
+         }
+
+         istr.ignore(1000, '\n');
       }
 
       if (!istr)
       {
+         delete[] m_description;
          setEmpty();
+
          istr.clear();
-         istr.ignore(1000, ',');
+         istr.ignore(1000, '\n');
       }
 
       return istr;
@@ -59,6 +107,7 @@ namespace sdds
    {
       static int counter = 1;
 
+      //Can also use the iomanip library to use setw, width, right, fixed, left
       ostr.setf(ios::left);
       ostr.width(2);
       ostr << counter << ". ";
@@ -78,7 +127,7 @@ namespace sdds
          ostr << priceAfterTax;
          ostr << "|";
          ostr.unsetf(ios::left);
-         if (m_onSpecial == 'Y')
+         if (m_onSpecial)
          {
             ostr.width(13);
             ostr.setf(ios::right);
@@ -95,33 +144,7 @@ namespace sdds
       ostr << endl;
       counter++;
 
-
       return ostr;
    }
 }
-//char tempName[10];
-//istr.getline(tempName, 10, ','); //read up to 9 meaningful characters along with a nullbyte
-//if (tempName && tempName[0])
-//{
-//   m_name = new char[strlen(tempName) + 1];
-//   strcpy(m_name, tempName);
-//}
-//
-//char tempDesc[10];
-//istr.getline(tempDesc, 25, ',');
-//if (tempDesc && tempDesc[0])
-//{
-//   m_description = new char[strlen(tempDesc) + 1];
-//   strcpy(m_description, tempDesc);
-//}
 
-//double tempPrice;
-//istr >> tempPrice;
-//if (tempPrice >= 0)
-//{
-//   m_price = tempPrice;
-//}
-
-//istr.ignore();
-//istr >> m_onSpecial;
-//istr.ignore(1000, '\n');

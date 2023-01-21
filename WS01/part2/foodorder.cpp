@@ -1,20 +1,29 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: January 16, 2022
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #define _CRT_SECURE_NO_WARNINGS
 #include <string>
 #include <cstring>
 #include "foodorder.h"
 
-double g_taxrate = 0;
-double g_dailydiscount = 0;
+double g_taxrate = 0.0;
+double g_dailydiscount = 0.0;
 
 using namespace std;
 namespace sdds
 {
-   void FoodOrder::setEmpty()
+   FoodOrder& FoodOrder::setEmpty()
    {
       m_description = nullptr;
       m_name[0] = '\0';
       m_price = 0.0;
       m_onSpecial = false;
+
+      return *this;
    }
 
    bool FoodOrder::isEmpty()const
@@ -100,9 +109,9 @@ namespace sdds
          istr.clear();
          istr.ignore(1000, '\n');
       }
-
       return istr;
    }
+
    std::ostream& FoodOrder::display(std::ostream& ostr) const
    {
       static int counter = 1;

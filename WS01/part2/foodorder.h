@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: January 16, 2022
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #ifndef SDDS_FOODORDER_H_
 #define SDDS_FOODORDER_H_
 #include <iostream>
@@ -14,7 +21,7 @@ namespace sdds
       double m_price{};
       bool m_onSpecial{};
 
-      void setEmpty();
+      FoodOrder& setEmpty();
       bool isEmpty()const;
       FoodOrder& deallocate();
       operator bool()const;
@@ -28,54 +35,3 @@ namespace sdds
    };
 }
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//namespace sdds
-//{
-//   class Food
-//   {
-//      char* m_name;
-//      int m_time;
-//      bool m_valid;
-//   public:
-//      Food();
-//      Food(const char* name, int time);
-//      ~Food();
-//      void setEmpty();
-//      bool isValid()const;
-//      int getTime()const;
-//      void display()const;
-//   };
-//}
-//}

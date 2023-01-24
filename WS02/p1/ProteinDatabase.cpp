@@ -5,13 +5,40 @@
 using namespace std;
 namespace sdds
 {
+   ProteinDatabase::ProteinDatabase(const ProteinDatabase& proteinDatabase)
+   {
+      *this = proteinDatabase;
+   }
+
+   ProteinDatabase& ProteinDatabase::operator=(const ProteinDatabase& proteinDatabase)
+   {
+      if (this != &proteinDatabase)
+      {
+         delete[] m_elements;
+         m_elements = nullptr;
+
+         if (proteinDatabase.m_elements)
+         {
+            m_elements = new string[proteinDatabase.m_noOfSeq];
+            for (int i = 0; i < static_cast<int>(proteinDatabase.m_noOfSeq); i++)
+            {
+               m_elements[i] = proteinDatabase.m_elements[i];
+            }
+         }
+
+         m_noOfSeq = proteinDatabase.m_noOfSeq;
+      }
+
+      return *this;
+   }
+
    ProteinDatabase::ProteinDatabase(std::string name)
    {
       ifstream file(name);
 
       if (file)
       {
-         string prefix;
+         string prefix{};
          do
          {
             getline(file, prefix);
@@ -20,49 +47,30 @@ namespace sdds
                m_noOfSeq++;
             }
          } while (file.peek() != EOF);
+
          m_elements = new string[m_noOfSeq];
+         file.seekg(0);
 
-      }
-
-      file.seekg(0);
-      if (file)
-      {
-         string prefix;
-         int i = 0;
          do
          {
-            getline(file, prefix);
-            if (prefix[0] == '>')
+            static int i{ 0 };
+            string line{};
+            static string seq{};
+            getline(file, line);
+            if (line[0] != '>')
             {
-               string* seq = new string;
-               string line;
-               bool ok;
-               do
+               seq.append(line);
+               if (line.length() != 60 || file.peek() == '>')
                {
-                  ok = true;
-                  getline(file, line);
-                  if (line.length() == 60)
-                  {
-                     seq->append(line);
-                  }
-                  else
-                  {
-                     seq->append(line);
-                     m_elements[i] = *seq;
-                     i++;
-                     ok = false;
-                  }
-               } while (ok);
-                      
+                  m_elements[i] = seq;
+                  i++;
+                  seq = "";
+               }
             }
          } while (file.peek() != EOF);
       }
-      else
-      {
-         cout << "Invalid file..." << endl;
-      }
-
    }
+
    size_t ProteinDatabase::size() const
    {
       return m_noOfSeq;
@@ -70,10 +78,11 @@ namespace sdds
    std::string ProteinDatabase::operator[](size_t seq)
    {
       string empty{};
-      return m_noOfSeq == seq - 1 ? m_elements[seq] : empty;
+      return seq < m_noOfSeq ? m_elements[seq] : empty;
    }
    ProteinDatabase::~ProteinDatabase()
    {
-      delete m_elements;
+      delete[] m_elements;
    }
 }
+

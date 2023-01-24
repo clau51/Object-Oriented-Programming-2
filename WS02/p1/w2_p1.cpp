@@ -36,6 +36,10 @@ int main(int argc, char** argv)
 	{
 		t.startClock();
 		sdds::ProteinDatabase protein_DBA;
+
+
+	
+
 		t.stopClock();
 		t.addTask("  0-arg Constructor");
 		std::cout << "  0-arg Constructor - a.size = "
@@ -49,6 +53,15 @@ int main(int argc, char** argv)
 
 		t.startClock();
 		ProteinDatabase protein_DBB(argv[1]);
+
+		//for (int i = 0; i < 101; i++)
+		//{
+		//	std::cout << std::setw(20) << i + 1 << ": "<< protein_DBB[i].substr(0, 20) << "]\n";
+		//}
+
+		std::cout << std::setw(20) << protein_DBB[36] << "]\n";
+
+		
 		t.stopClock();
 		t.addTask("  1-arg Constructor");
 		std::cout << "  1-arg Constructor - b.size = "

@@ -11,11 +11,12 @@ namespace sdds
 
    public:
       ProteinDatabase() = default;
+      ProteinDatabase(const ProteinDatabase& proteinDatabase);
+      ProteinDatabase& operator=(const ProteinDatabase& proteinDatabase);
       ProteinDatabase(std::string name);
       size_t size() const;
       std::string operator[](size_t seq);
       ~ProteinDatabase();
-
    };
 }
 

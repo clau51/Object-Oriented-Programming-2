@@ -6,7 +6,7 @@
 
 namespace sdds
 {
-	struct Task
+	struct Task //should we make member var private?
 	{
 		std::string m_taskName{};
 		std::string m_timeUnit{};
@@ -15,17 +15,17 @@ namespace sdds
 
 	class TimedTask
 	{
-		static int m_records;
+		int m_records{};
 		std::chrono::steady_clock::time_point m_startTime{};
 		std::chrono::steady_clock::time_point m_endTime{};
-		Task* task{};
+		Task task[10]{};
 
 	public:
 		TimedTask() = default;
 		void startClock();
 		void stopClock();
 		void addTask(const char* taskName);
-		friend std::ostream& operator<<(std::ostream& ostr, TimedTask& timedtask);
+		friend std::ostream& operator<<(std::ostream& ostr, const TimedTask& timedTask);
 	};
 
 }

@@ -52,6 +52,9 @@ int main(int argc, char** argv)
 		t.stopClock();
 		t.addTask("  1-arg Constructor");
 		auto cnt = protein_DBB.size();
+
+		//std::cout << protein_DBB[23013].substr(0, 20);
+
 		std::cout << "  1-arg Constructor - protein_DBB.size = "
 		          << std::setw(7) << cnt << " strings -> \n";
 		std::cout << std::setw(70) << "(b) String     1: ["

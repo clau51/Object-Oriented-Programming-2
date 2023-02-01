@@ -1,0 +1,4 @@
+﻿  w3_p2.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS03\p2\Set.h(15,39): error C3861: 'size': identifier not found
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS03\p2\Set.h(24): message : see reference to class template instantiation 'sdds::Set<T>' being compiled
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS03\p2\Set.h(17,25): error C3861: 'm_collection': identifier not found

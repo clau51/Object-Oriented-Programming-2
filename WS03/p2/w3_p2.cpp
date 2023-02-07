@@ -37,7 +37,6 @@ int main(int argc, char** argv)
 	};
 
 
-
 	{
 		std::cout << "******************************************************\n";
 		std::cout << "* Testing the Collection of Integers                 *\n";
@@ -133,29 +132,27 @@ int main(int argc, char** argv)
 		std::cout << "******************************************************\n\n";
 	}
 
-	sdds::Collection<int, 100>test;
-	test.
-	//{
-	//	std::cout << "******************************************************\n";
-	//	std::cout << "* Testing the Set of Pairs                           *\n";
-	//	std::cout << "******************************************************\n";
-	//	sdds::Collection<sdds::Pair, 100>* setDictionary = new sdds::Set<sdds::Pair>();
+	{
+		std::cout << "******************************************************\n";
+		std::cout << "* Testing the Set of Pairs                           *\n";
+		std::cout << "******************************************************\n";
+		sdds::Collection<sdds::Pair, 100>* setDictionary = new sdds::Set<sdds::Pair>();
 
-	//	for (const auto& item : pData)
-	//		setDictionary->add(item);
+		for (const auto& item : pData)
+			setDictionary->add(item);
 
-	//	std::cout << "Set size: [" << setDictionary->size() << "]\n";
-	//	setDictionary->display();
+		std::cout << "Set size: [" << setDictionary->size() << "]\n";
+		setDictionary->display();
 
-	//	std::cout << "Item [1]: ["  << (*setDictionary)[1].getKey()    << "]["
-	//	                            << (*setDictionary)[1].getValue()  << "]\n";
-	//	std::cout << "Item [4]: ["  << (*setDictionary)[4].getKey()    << "]["
-	//	                            << (*setDictionary)[4].getValue()  << "]\n";
-	//	std::cout << "Item [11]: [" << (*setDictionary)[11].getKey()   << "]["
-	//	                            << (*setDictionary)[11].getValue() << "]\n";
-	//	std::cout << "******************************************************\n\n";
-	//	delete setDictionary;
-	//}
+		std::cout << "Item [1]: ["  << (*setDictionary)[1].getKey()    << "]["
+		                            << (*setDictionary)[1].getValue()  << "]\n";
+		std::cout << "Item [4]: ["  << (*setDictionary)[4].getKey()    << "]["
+		                            << (*setDictionary)[4].getValue()  << "]\n";
+		std::cout << "Item [11]: [" << (*setDictionary)[11].getKey()   << "]["
+		                            << (*setDictionary)[11].getValue() << "]\n";
+		std::cout << "******************************************************\n\n";
+		delete setDictionary;
+	}
 
 	return cout;
 }

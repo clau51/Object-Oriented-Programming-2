@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 5, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #ifndef SDDS_COLLECTION_H_
 #define SDDS_COLLECTION_H_
 
@@ -7,20 +14,19 @@
 
 namespace sdds
 {
-   template<typename T, unsigned int capacity>
+   template<typename T, unsigned int CAPACITY>
    class Collection
    {
       unsigned int m_noOfElements{};
-      T m_dummy{}; //Pair m_dummy - call constructor & initialize to 0
-   protected:
-      T m_collection[capacity]{}; //Pair m_collection[10]
+      static T m_dummy;
+      T m_collection[CAPACITY]{}; 
    public:
       unsigned int size() const
       {
          return m_noOfElements;
       }
 
-      void display(std::ostream& ostr = std::cout) const
+      std::ostream& display(std::ostream& ostr = std::cout) const
       {
          ostr << "----------------------" << std::endl;
          ostr << "| Collection Content |" << std::endl;
@@ -32,12 +38,14 @@ namespace sdds
          }
 
          ostr << "----------------------" << std::endl;
+
+         return ostr;
       }
 
       virtual bool add(const T& item)
       {
          bool added = false;
-         if (m_noOfElements < capacity)
+         if (m_noOfElements < CAPACITY)
          {
             m_collection[m_noOfElements] = item;
             m_noOfElements++;
@@ -46,7 +54,7 @@ namespace sdds
          return added;
       }
 
-      T operator[](unsigned int index) const
+      T operator[](const unsigned int index) const
       {
          return index < m_noOfElements ? m_collection[index] : m_dummy;
       }
@@ -54,14 +62,12 @@ namespace sdds
       ~Collection() = default;
    };
 
-   template<>
-   class Collection<Pair, 100>
-   {
-      Pair m_dummy{ "No key", "No Value" };
-   };
+   template<typename T, unsigned int CAPACITY>
+   T Collection<T, CAPACITY>::m_dummy{};
 
-   //template<typename T, unsigned int capacity>
-   //unsigned int Collection<typename T, capacity>::m_noOfElements;
+   template<>
+   Pair Collection<Pair, 100>::m_dummy{ "No Key", "No Value" };
+
 
 }
 

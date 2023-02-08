@@ -1,0 +1,8 @@
+﻿  Toy.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(27,7): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(50,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(54,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(59,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(62,34): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\Toy.cpp(63,24): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  p1.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS04\p1\x64\Debug\p1.exe

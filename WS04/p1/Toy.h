@@ -21,6 +21,7 @@ namespace sdds
       Toy(const std::string& toy);
       friend std::ostream& operator<<(std::ostream& ostr, const Toy& toy);
    };
+
 }
 
 #endif

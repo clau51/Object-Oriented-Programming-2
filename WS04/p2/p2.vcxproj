@@ -128,9 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\p1\Toy.cpp" />
-    <ClCompile Include="..\p1\w4_p1.cpp" />
     <ClCompile Include="Child.cpp" />
     <ClCompile Include="ConfirmOrder.cpp" />
+    <ClCompile Include="w4_p2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\p1\Toy.h" />

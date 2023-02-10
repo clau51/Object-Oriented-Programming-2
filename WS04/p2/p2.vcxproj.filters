@@ -18,13 +18,13 @@
     <ClCompile Include="..\p1\Toy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\p1\w4_p1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Child.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConfirmOrder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="w4_p2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

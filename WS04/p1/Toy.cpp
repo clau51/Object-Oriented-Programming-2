@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 7, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #include <string>
 #include <iostream>
 #include <iomanip>
@@ -8,35 +15,12 @@ namespace sdds
 {
    std::string& Toy::trim(std::string& s)
    {
-      int startIndex = 0;
-      bool exit{};
-      for (size_t i = 0; i < s.length() - 1 && !exit; i++)
-      {
-         if (s[i] == ' ')
-         {
-            startIndex++;
-         }
-         else
-         {
-            exit = true;
-         }
-      }
+      int first = s.find_first_not_of(' ');
+      int last = s.find_last_not_of(' ');
+      s.erase(0, first);
+      s.erase(last + 1 - first);
 
-      int endIndex = 0;
-      exit = false;
-      for (int i = s.length() - 1; i >= 0 && !exit; i--)
-      {
-         if (s[i] == ' ')
-         {
-            endIndex++;
-         }
-         else
-         {
-            exit = true;
-         }
-      }
-
-      return s[s.length() - 1] == ' ' ? s = s.substr(startIndex, s.length() - endIndex) : s = s.substr(startIndex, s.length() - endIndex);
+      return s;
    }
    void Toy::update(int numItems)
    {
@@ -47,25 +31,24 @@ namespace sdds
    {
       string temp = toy;
 
+      //Order ID
       int colonIndex = temp.find(':');
-      m_orderID = static_cast<unsigned int>(stoi(temp));
+      m_orderID = stoul(temp);
       temp.erase(0, colonIndex + 1);
 
+      //Toy Name
       colonIndex = temp.find(':');
       m_toyName = temp.substr(0, temp.find(':'));
-
       trim(m_toyName);
-
-      colonIndex = temp.find(':');
       temp.erase(0, colonIndex + 1);
 
+      //No Of Toys
       colonIndex = temp.find(':');
       m_noOfToys = stod(temp);
       temp.erase(0, colonIndex + 1);
 
+      //Price
       m_price = stod(temp);
-
-
    }
 
    std::ostream& operator<<(std::ostream& ostr, const Toy& toy)
@@ -82,7 +65,6 @@ namespace sdds
       double tax = toy.m_tax * subtotal;
       ostr << setw(6) << tax << " total:";
       ostr << setw(7) << subtotal + tax << endl;
-
 
       return ostr;
    }

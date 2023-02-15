@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 7, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #ifndef SDDS_CHILD_H_
 #define SDDS_CHILD_H_
 
@@ -22,15 +29,6 @@ namespace sdds
       friend std::ostream& operator<<(std::ostream& ostr, const Child& child);
    };
 }
-
-//Toy*
-// [ m_arrOfPtrs[0] , m_arrOfPtrs[1]] 
-//0               1
-//
-////m_arrOfPtrs[0] a toy pointer
-//Toy toy1;
-//
-//m_arrOfPtrs[0] = new Toy(toy1)
 
 #endif
 

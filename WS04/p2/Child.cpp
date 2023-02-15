@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 7, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #include <iostream>
 #include "Child.h"
 
@@ -8,11 +15,11 @@ namespace sdds
    Child::Child(std::string name, int age, const Toy* toys[], size_t count)
    {
       m_name = name;
-      m_age = age;
-      m_count = count;
+      m_age = age; //validate?
+      m_count = count; //validate?
       //Assigning m_toy with dynamic memory of Toy Pointers | * | * | * |
       m_arrPtr = new const Toy* [count]; //m_arrPtr is now pointing to an array of pointers
-      for (int i = 0; i < count; i++)
+      for (size_t i = 0; i < count; i++)
       {
          m_arrPtr[i] = new Toy(*toys[i]);
       }

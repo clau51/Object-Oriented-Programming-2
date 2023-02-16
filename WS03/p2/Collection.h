@@ -1,3 +1,4 @@
+#include "Collection.h"
 //Name: Carmen Lau
 //Student ID: 166689216
 //Email: clau51@myseneca.ca
@@ -57,6 +58,11 @@ namespace sdds
       T operator[](const unsigned int index) const
       {
          return index < m_noOfElements ? m_collection[index] : m_dummy;
+      }
+
+      template<typename T>
+      inline Collection<T>::Collection(const std::string& name)
+      {
       }
 
       ~Collection() = default;

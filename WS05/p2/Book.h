@@ -2,6 +2,7 @@
 #define SDDS_BOOK_H_
 
 #include <string>
+#include "SpellChecker.h"
 
 namespace sdds
 {
@@ -23,6 +24,12 @@ namespace sdds
       Book(const std::string& strBook);
       std::string& trim(std::string& s);
       friend std::ostream& operator<<(std::ostream& ostr, const Book& book);
+
+      template<typename T>
+      void fixSpelling(T& spellChecker)
+      {
+         spellChecker(m_description);
+      }
    };
 }
 

@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
-    <ClCompile Include="Collection.cpp" />
     <ClCompile Include="Movie.cpp" />
     <ClCompile Include="SpellChecker.cpp" />
     <ClCompile Include="w5_p2.cpp" />

@@ -1,5 +1,6 @@
 #include <string>
 #include "Station.h"
+#include "Utilities.h"
 
 using namespace std;
 namespace sdds
@@ -9,15 +10,26 @@ namespace sdds
 
    Station::Station(const std::string& str)
    {
+       Utilities utils{};
+       size_t position{};
+       bool more{};
+       m_name = utils.extractToken(str, position, more);
+       m_serialNum = stoul(utils.extractToken(str, position, more));
+       m_numItems = stoi(utils.extractToken(str, position, more));
 
+       if (utils.getFieldWidth() > Station::m_widthField) {
+           m_widthField = utils.getFieldWidth();
+       }
+
+       m_description = utils.extractToken(str, position, more);
    }
    const std::string& Station::getItemName() const
    {
-      return string();
+       return m_name;
    }
    size_t Station::getNextSerialNumber()
    {
-      return size_t();
+      return m_next
    }
    size_t Station::getQuantity() const
    {

@@ -7,7 +7,7 @@ namespace sdds
    class Utilities
    {
       size_t m_widthField = 1;
-      static char delim; //class variable
+      static char m_delim; //class variable
    public:
       void setFieldWidth(size_t newWidth);
       size_t getFieldWidth()const;

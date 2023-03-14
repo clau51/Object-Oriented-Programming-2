@@ -1,4 +1,3 @@
-﻿  Utilities.cpp
-C:\Users\Shoyr\Desktop\OOP345\OOP345Works\MS01\Utilities.cpp(33,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Shoyr\Desktop\OOP345\OOP345Works\MS01\Utilities.cpp(34,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  MS01.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\MS01\x64\Debug\MS01.exe
+﻿  Station.cpp
+C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\MS01\Station.cpp(28): warning C4172: returning address of local variable or temporary
+  MS01.vcxproj -> C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\MS01\x64\Debug\MS01.exe

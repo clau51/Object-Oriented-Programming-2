@@ -10,7 +10,7 @@ namespace sdds
       int m_id{};
       std::string m_name{};
       std::string m_description{};
-      size_t m_nextSerial{};
+      size_t m_serialNum{};
       size_t m_numItems{};
       static size_t m_widthField;
       static size_t id_generator;

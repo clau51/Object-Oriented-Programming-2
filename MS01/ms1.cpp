@@ -44,63 +44,63 @@ int main(int argc, char** argv)
 		exit(2);
 	}
 
-	//cout << "========================================" << endl;
-	//cout << "=         Stations (summary)           =" << endl;
-	//cout << "========================================" << endl;
-	//for (Station& theItem : theStations)
-	//	theItem.display(cout, false);
-	//cout << endl << endl;
+	cout << "========================================" << endl;
+	cout << "=         Stations (summary)           =" << endl;
+	cout << "========================================" << endl;
+	for (Station& theItem : theStations)
+		theItem.display(cout, false);
+	cout << endl << endl;
 
-	//cout << "========================================" << endl;
-	//cout << "=          Stations (full)             =" << endl;
-	//cout << "========================================" << endl;
-	//for (Station& theItem : theStations)
-	//	theItem.display(cout, true);
-	//cout << endl << endl;
+	cout << "========================================" << endl;
+	cout << "=          Stations (full)             =" << endl;
+	cout << "========================================" << endl;
+	for (Station& theItem : theStations)
+		theItem.display(cout, true);
+	cout << endl << endl;
 
-	////Select an object and verify all the functionality it working
-	//cout << "========================================" << endl;
-	//cout << "=          Manual Validation           =" << endl;
-	//cout << "========================================" << endl;
-	//cout << "getItemName(): " << theStations[0].getItemName() << endl;
-	//cout << "getNextSerialNumber(): " << theStations[0].getNextSerialNumber() << endl;
-	//cout << "getNextSerialNumber(): " << theStations[0].getNextSerialNumber() << endl;
-	//cout << "getQuantity(): " << theStations[0].getQuantity() << endl;
-	//theStations[0].updateQuantity();
-	//cout << "getQuantity(): " << theStations[0].getQuantity() << endl;
-	//cout << endl;
+	//Select an object and verify all the functionality it working
+	cout << "========================================" << endl;
+	cout << "=          Manual Validation           =" << endl;
+	cout << "========================================" << endl;
+	cout << "getItemName(): " << theStations[0].getItemName() << endl;
+	cout << "getNextSerialNumber(): " << theStations[0].getNextSerialNumber() << endl;
+	cout << "getNextSerialNumber(): " << theStations[0].getNextSerialNumber() << endl;
+	cout << "getQuantity(): " << theStations[0].getQuantity() << endl;
+	theStations[0].updateQuantity();
+	cout << "getQuantity(): " << theStations[0].getQuantity() << endl;
+	cout << endl;
 
 
-	//cout << "========================================" << endl;
-	//cout << "=              Utilities               =" << endl;
-	//cout << "========================================" << endl;
-	//// create & initialize an array of input data
-	//const struct { char delim; std::string data; } input[]
-	//{
-	//	{ 'a', "a"},
-	//	{ 'b', "a" },
-	//	{ 'l', "Hello"},
-	//	{ ',', "apple,orange,banana,kiwi,strawberry,yellow watermellon" },
-	//	{ '|', "Gengar|Arcanine|Bulbasaur|Blaziken|C h a r i z a r d|Umbreon|Lucario|Eevee"}
-	//};
+	cout << "========================================" << endl;
+	cout << "=              Utilities               =" << endl;
+	cout << "========================================" << endl;
+	// create & initialize an array of input data
+	const struct { char delim; std::string data; } input[]
+	{
+		{ 'a', "a"},
+		{ 'b', "a" },
+		{ 'l', "Hello"},
+		{ ',', "apple,orange,banana,kiwi,strawberry,yellow watermellon" },
+		{ '|', "Gengar|Arcanine|Bulbasaur|Blaziken|C h a r i z a r d|Umbreon|Lucario|Eevee"}
+	};
 
-	//for (auto& item : input)
-	//{
-	//	Utilities::setDelimiter(item.delim);
-	//	Utilities util;
-	//	bool more = true; // if there are more tokens in the input string
-	//	size_t pos = 0u; // position of the next token in the input string
-	//	cout << "Data: [" << item.data << "]    Delimiter: [" << item.delim << "]\n";
-	//	while (more)
-	//	{
-	//		try
-	//		{
-	//			auto token = util.extractToken(item.data, pos, more);
-	//			cout << "   Token: [" << token << "] [" << util.getFieldWidth() << "]\n";
-	//		}
-	//		catch (...) { cout << "   ERROR: No token.\n"; }
-	//	}
-	//}
+	for (auto& item : input)
+	{
+		Utilities::setDelimiter(item.delim);
+		Utilities util;
+		bool more = true; // if there are more tokens in the input string
+		size_t pos = 0u; // position of the next token in the input string
+		cout << "Data: [" << item.data << "]    Delimiter: [" << item.delim << "]\n";
+		while (more)
+		{
+			try
+			{
+				auto token = util.extractToken(item.data, pos, more);
+				cout << "   Token: [" << token << "] [" << util.getFieldWidth() << "]\n";
+			}
+			catch (...) { cout << "   ERROR: No token.\n"; }
+		}
+	}
 
 	return 0;
 }

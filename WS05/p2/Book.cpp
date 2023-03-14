@@ -1,3 +1,11 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 13, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #include <iostream>
 #include <iomanip>
 #include "Book.h"
@@ -68,12 +76,12 @@ namespace sdds
    }
    std::ostream& operator<<(std::ostream& ostr, const Book& book)
    {
-      ostr << setw(20) << book.m_author << "|";
-      ostr << setw(22) << book.m_title << "|";
-      ostr << setw(5) << book.m_country << "|";
-      ostr << setw(4) << book.m_year << "|";
-      ostr << setw(6) << fixed << setprecision(2) << book.m_price << "|";
-      ostr << book.m_description;
+      ostr << setw(20) << book.m_author << " | ";
+      ostr << setw(22) << book.m_title << " | ";
+      ostr << setw(5) << book.m_country << " | ";
+      ostr << setw(4) << book.m_year << " | ";
+      ostr << setw(6) << fixed << setprecision(2) << book.m_price << " | ";
+      ostr << book.m_description << endl;
 
       return ostr;
    }

@@ -1,3 +1,11 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 13, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -11,18 +19,26 @@ namespace sdds
    {
       if (filename[0])
       {
-
          ifstream file(filename);
 
          if (file)
          {
+            string tempBad{};
+            string tempGood{};
             do
             {
-               file >> m_badWords[m_vocabCount];
-               file >> m_goodWords[m_vocabCount];
-               m_vocabCount++;
+               file >> tempBad;
+               file >> tempGood;
+               if (tempBad.find_first_not_of(' ') != std::string::npos &&
+                  tempGood.find_first_not_of(' ') != std::string::npos)
+               {
+                  m_badWords[m_vocabCount] = tempBad;
+                  m_goodWords[m_vocabCount] = tempGood;
+                  m_vocabCount++;
+                  tempBad = ' ';
+                  tempGood = ' ';
+               }
 
-               //NEED TO FIX, EXTRA LINE GETTING STORED
             } while (file.peek() != EOF);
          }
          else
@@ -30,20 +46,19 @@ namespace sdds
             const char* msg = "Bad file name!";
             throw msg;
          }
-
-      } //else
+      } 
    }
+
    void SpellChecker::operator()(std::string& text)
    {
-      for (int i = 0; i < m_vocabCount; i++)
+      for (size_t i = 0; i < m_vocabCount; i++)
       {
-         //NEEDS TO FIX TO SEARCH MULTIPLE WORDS IN SAME SENTENCE
-
-         int begIndex = text.find(m_badWords[i]);
-         if (begIndex >= 0)
+         size_t begIndex = text.find(m_badWords[i]);
+         while (begIndex != std::string::npos)
          {
             text.replace(begIndex, m_badWords[i].length(), m_goodWords[i]);
             m_replaceCount[i]++;
+            begIndex = text.find(m_badWords[i]);
          }
       }
    }
@@ -51,7 +66,7 @@ namespace sdds
    void SpellChecker::showStatistics(std::ostream& out) const
    {
       out << "Spellchecker Statistics" << endl;
-      for (int i = 0; i < m_vocabCount; i++)
+      for (size_t i = 0; i < m_vocabCount; i++)
       {
          out << setw(15) << m_badWords[i] << ": " << m_replaceCount[i] << " replacements\n";
       }

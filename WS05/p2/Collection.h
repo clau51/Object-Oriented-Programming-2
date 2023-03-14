@@ -1,3 +1,11 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 13, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #ifndef SDDS_COLLECTION_H_
 #define SDDS_COLLECTION_H_
 
@@ -11,8 +19,8 @@ namespace sdds
    {
       std::string m_name{};
       T* m_items{};
-      size_t m_size;
-      void (*m_fnPtr)(const Collection<T>&, const T&);
+      size_t m_size{};
+      void (*m_fnPtr)(const Collection<T>& collection, const T& t){};
    public:
       Collection(const std::string& name)
       {
@@ -37,7 +45,7 @@ namespace sdds
          return m_size;
       }
 
-      void setObserver(void (*observer)(const Collection<T>&, const T&))
+      void setObserver(void (*observer)(const Collection<T>& collection, const T& t))
       {
          m_fnPtr = observer;
       }
@@ -81,7 +89,8 @@ namespace sdds
       {
          if (index >= m_size)
          {
-            throw std::out_of_range("Bad Index " + std::to_string(index) + ". Collection has " + std::to_string(m_size) + " items.");
+            throw std::out_of_range("Bad index [" + std::to_string(index) +
+               "]. Collection has [" + std::to_string(m_size) + "] items.");
          }
 
          return m_items[index];
@@ -91,7 +100,8 @@ namespace sdds
       {
          bool found{};
          int index{};
-         for (int i = 0; i < m_size && !found; i++)
+         size_t i{};
+         for (i = 0; i < m_size && !found; i++)
          {
             if (title == m_items[i].title())
             {
@@ -102,18 +112,17 @@ namespace sdds
 
          return found ? &m_items[index] : nullptr;
       }
-
-      friend std::ostream& operator<<(std::ostream& ostr, const Collection<T>& collection)
-      {
-         for (int i = 0; i < collection.m_size; i++)
-         {
-            ostr << collection.m_items[i] << std::endl;
-         }
-
-         return ostr;
-      }
-
    };
 
+   template<typename T>
+   std::ostream& operator<<(std::ostream& ostr, const Collection<T>& collection)
+   {
+      for (size_t i = 0; i < collection.size(); i++)
+      {
+         ostr << collection[i];
+      }
+
+      return ostr;
+   }
 };
 #endif

@@ -1,3 +1,11 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Feb 13, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 // Workshop 5 - Functions and Error Handling
 // 2020/02 - Cornel
 // 2021/01/19 - Chris
@@ -64,7 +72,7 @@ int main(int argc, char** argv)
 
 
       std::ifstream file(argv[1]);
-      std::string temp;
+      std::string temp{};
       Book book{};
       int counter = 0;
       if (file)
@@ -138,8 +146,6 @@ int main(int argc, char** argv)
       {
          book.price() = gbpToCadRate * book.price();
       }
-
-      return book;
    };
 
    std::cout << "-----------------------------------------\n";
@@ -150,7 +156,7 @@ int main(int argc, char** argv)
 
    // TODO (from part #1): iterate over the library and update the price of each book
    //         using the lambda defined above.
-   for (int i = 0; i < 7; i++)
+   for (size_t i = 0; i < library.size(); i++)
    {
       priceFix(library[i]);
    }
@@ -174,7 +180,7 @@ int main(int argc, char** argv)
       //       - lines that start with "#" are considered comments and should be ignored
 
       std::ifstream file(argv[2]);
-      std::string temp;
+      std::string temp{};
       Movie movie{};
       int counter = 0;
       if (file)
@@ -198,31 +204,33 @@ int main(int argc, char** argv)
    std::cout << "-----------------------------------------\n";
    std::cout << "Testing addition and callback function\n";
    std::cout << "-----------------------------------------\n";
-   if (argc > 2) {
-   	// Add a few movies to collection; no observer is set
-   	((theCollection += movies[0]) += movies[1]) += movies[2];
-   	theCollection += movies[1];
-   	// add more movies; now we get a callback from the collection
-   	theCollection.setObserver(movieAddedObserver);
-   	theCollection += movies[3];
-   	theCollection += movies[3];
-   	theCollection += movies[4];
+   if (argc > 2)
+   {
+      // Add a few movies to collection; no observer is set
+      ((theCollection += movies[0]) += movies[1]) += movies[2];
+      theCollection += movies[1];
+      // add more movies; now we get a callback from the collection
+      theCollection.setObserver(movieAddedObserver);
+      theCollection += movies[3];
+      theCollection += movies[3];
+      theCollection += movies[4];
    }
-   else {
-   	std::cout << "** No movies in the Collection\n";
+   else
+   {
+      std::cout << "** No movies in the Collection\n";
    }
    std::cout << "-----------------------------------------\n\n";
-   
+
    std::cout << "-----------------------------------------\n";
    std::cout << "Testing exceptions and operator[]\n";
    std::cout << "-----------------------------------------\n";
 
 
-   	// TODO: The following loop can generate generate an exception
-   	//         write code to handle the exception
-   	//       If an exception occurs print a message in the following format
-   	//** EXCEPTION: ERROR_MESSAGE<endl>
-   	//         where ERROR_MESSAGE is extracted from the exception object.
+   // TODO: The following loop can generate generate an exception
+   //         write code to handle the exception
+   //       If an exception occurs print a message in the following format
+   //** EXCEPTION: ERROR_MESSAGE<endl>
+   //         where ERROR_MESSAGE is extracted from the exception object.
    try
    {
       for (auto i = 0u; i < 10; ++i)
@@ -230,7 +238,7 @@ int main(int argc, char** argv)
          std::cout << theCollection[i];
       }
    }
-   catch (std::out_of_range e)
+   catch (std::out_of_range& e)
    {
       std::cerr << "** EXCEPTION: " << e.what() << std::endl;
    }
@@ -245,11 +253,11 @@ int main(int argc, char** argv)
    std::cout << "-----------------------------------------\n";
    for (auto i = 3; i < argc; ++i)
    {
-   		// TODO: The following statement can generate generate an exception
-   		//         write code to handle the exception
-   		//       If an exception occurs print a message in the following format
-   		//** EXCEPTION: ERROR_MESSAGE<endl>
-   		//         where ERROR_MESSAGE is extracted from the exception object.
+      // TODO: The following statement can generate generate an exception
+      //         write code to handle the exception
+      //       If an exception occurs print a message in the following format
+      //** EXCEPTION: ERROR_MESSAGE<endl>
+      //         where ERROR_MESSAGE is extracted from the exception object.
 
       try
       {
@@ -267,9 +275,10 @@ int main(int argc, char** argv)
          std::cout << "** EXCEPTION: " << e << std::endl;
       }
    }
-   if (argc < 3) {
-   	std::cout << "** Spellchecker is empty\n";
-   	std::cout << "-----------------------------------------\n";
+   if (argc < 3)
+   {
+      std::cout << "** Spellchecker is empty\n";
+      std::cout << "-----------------------------------------\n";
    }
    std::cout << "\n";
 
@@ -284,10 +293,10 @@ int main(int argc, char** argv)
    std::cout << "-----------------------------------------\n";
    const Movie* aMovie = theCollection["Terminator 2"];
    if (aMovie == nullptr)
-   	std::cout << "** Movie Terminator 2 not in collection.\n";
+      std::cout << "** Movie Terminator 2 not in collection.\n";
    aMovie = theCollection["Dark Phoenix"];
    if (aMovie != nullptr)
-   	std::cout << "In this collection:\n" << *aMovie;
+      std::cout << "In this collection:\n" << *aMovie;
    std::cout << "-----------------------------------------\n\n";
 
    return 0;

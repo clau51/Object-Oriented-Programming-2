@@ -1,0 +1,102 @@
+
+   //ifstream file(filename);
+   //if (file.is_open())
+   //{
+   //   file >> m_numOfBakedGoods;
+   //   m_bakedGoods = new BakedGood[m_numOfBakedGoods];
+   //   for (size_t i = 0; i < m_numOfBakedGoods; i++)
+   //   {
+   //      file >> m_bakedGoods[i].m_bakedType;
+   //      file.ignore();
+   //      getline(file, m_bakedGoods[i].m_description);
+   //      file >> m_bakedGoods[i].m_shelfLife;
+   //      file >> m_bakedGoods[i].m_stock;
+   //      file >> m_bakedGoods[i].m_price;
+   //   }
+   //}
+
+
+
+            //string tempString{};
+            //getline(file, tempString);
+
+            //string tempBakedType{};
+
+            ////size_t begPos = 0; 
+            ////size_t newPos = tempString.find(',');
+            ////tempBakedType = tempString.substr(begPos, newPos);
+
+            //BakedGood bakedGood{};
+            ////Baked Type
+            //int pos = tempString.find(','); //" Bread ," //7 chars in total
+            //tempBakedType = tempString.substr(0, pos); //8 (comma pos 8)
+            //trim(tempBakedType);
+            //if (tempBakedType == "Bread")
+            //{
+            //   bakedGood.m_bakedType = BakedType::BREAD;
+            //}
+            //else if (tempBakedType == "Pastery")
+            //{
+            //   bakedGood.m_bakedType = BakedType::PASTERY;
+            //} //else throw error?
+
+            //tempString.erase(0, pos + 1);
+
+            ////Description
+            //pos = tempString.find(',');
+            //bakedGood.m_description = tempString.substr(0, pos);
+            //trim(bakedGood.m_description);
+            //tempString.erase(0, pos + 1);
+
+            ////Shelf Life
+            //pos = tempString.find(',');
+            //bakedGood.m_shelfLife = stoi(tempString.substr(0, pos));
+            //tempString.erase(0, pos + 1);
+
+            ////Stock
+            //pos = tempString.find(',');
+            //bakedGood.m_stock = stoi(tempString.substr(0, pos));
+            //tempString.erase(0, pos + 1);
+
+            ////Price
+            //bakedGood.m_price = stod(tempString);
+
+            //m_bakedGoods.push_back(bakedGood);
+
+
+
+   // ANOTHER WAY
+
+            //BakedGood bakedGood{};
+            //string tempString{};
+            //string tempBakedType{};
+            //string tempShelfLife{};
+            //string tempStock{};
+            //string tempPrice{};
+            //string tempDescription{};
+
+            //getline(file, tempString);
+            //stringstream ss(tempString);
+            //ss >> tempBakedType;
+            //if (tempBakedType == "Bread")
+            //{
+            //   bakedGood.m_bakedType = BakedType::BREAD;
+            //}
+            //else if (tempBakedType == "Pastery")
+            //{
+            //   bakedGood.m_bakedType = BakedType::PASTERY;
+            //}
+            //while (ss >> ws && isdigit(ss.peek()) == false)
+            //{
+            //   ss >> tempDescription;
+            //   bakedGood.m_description += tempDescription + ' ';
+            //}
+            //trim(bakedGood.m_description);
+            //ss >> tempShelfLife;
+            //bakedGood.m_shelfLife = stoul(tempShelfLife);
+            //ss >> tempStock;
+            //bakedGood.m_stock = stoul(tempStock);
+            //ss >> tempPrice;
+            //bakedGood.m_price = stod(tempPrice);
+
+            //m_bakedGoods.push_back(bakedGood);

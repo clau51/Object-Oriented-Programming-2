@@ -1,0 +1,4 @@
+﻿  Bakery.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.h(29,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.h(30,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  p2.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\x64\Debug\p2.exe

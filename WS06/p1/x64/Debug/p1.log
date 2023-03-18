@@ -1,0 +1,5 @@
+﻿  Employee.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p1\Employee.cpp(11,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p1\Employee.cpp(12,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p1\Employee.cpp(74,46): warning C4101: 'e': unreferenced local variable
+  p1.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p1\x64\Debug\p1.exe

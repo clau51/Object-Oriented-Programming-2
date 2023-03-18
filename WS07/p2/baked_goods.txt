@@ -1,0 +1,3 @@
+Bread   Pumpernickel Loaf   5              12      4.55  
+Pastry  Crossiant           2              50      1.50  
+Bread   Sandwich Loaf       5              25      3.99  

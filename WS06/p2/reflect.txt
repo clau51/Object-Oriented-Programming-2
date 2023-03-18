@@ -1,0 +1,73 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Mar 12, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+1. Why do you need to deallocate the dynamically allocated memory in your vector?
+
+The reason for this is because the relationship that exists between a College and a Person is a compositional relationship since the College object "has a" relationship with the Person object. The College is the composer class while the Person is the composing class, meaning College is responsible for the liftetime of Person, and as a result, if the College object goes out of scope, the Person object will too. This would mean that we would also have to deallocate everything inside of Person first, which includes anything that inherits from the Person class. In my workshop, I have the following:
+std::vector<Person*> m_persons{};
+Since the vector class manages memory (deallocation/allocation), each individual Person* does not have to be manually managed by myself. When I want to add elements or remove relements from m_persons, vector will allocation and deallocate accordingly. However, the issues arises when the elements (which is a Person*) in m_persons is pointing to something that requires memory management. If m_persons goes out of scope, all the elements of type Person* will get destroyed, and whatever Person* was initially pointing to, will be destroyed as well without proper deallocation. As a result, memory leak will occur. To deal with this issue, we must loop through each individual element in the vector and deallocate whatever is inside the vector of type Person pointers. Again, we would not have to deallocate the vector itself since the vector class handles memory.
+
+2. When building an object from the input file, different things can go wrong: the record represents an unknown type of person, or record contains invalid data. How can the function loadData() detect what went wrong? Can you think at another solution than the one you have implemented?
+
+The loadData() function uses a try-catch block to detect if something goes wrong. "thePerson" is assigned whatever buildInstance returns, and the buildInstance will call a constructor depending on the first letter received in the istream. In the constructor blocks for Student and Employee, there are instances where an error is thrown if something invalid is received. Depending on whatever is thrown, the catch block in loadData() will catch that error and display an error message. Hence, this makes handling much easier as it will handle many types of errors as long as it is properly caught in the try-catch block. If I were to think of another solution in replacement of a try-catch block, I would use an if or if-else block. This would require me to make many changes to the Student and Employee constructors, as well as create a new member variable called "int m_invalid" and a query called isValid() that possibly looks like the following:
+   bool Employee::isValid() const
+   {
+      return m_invalid > 0 ? false : true;
+   }
+In the constructors, I would have to remove anything that throws an error as I no longer have a try-catch block in my loadData() function. Instead, I would increment m_invalid whenever there is something invalid. This way I can check if thePerson.isValid().
+The try-catch block would now look like:
+      thePerson = sdds::buildInstance(file);
+      if (thePerson && thePerson->isValid())
+      {
+         theCollege += thePerson;
+      }
+
+Below, I will also provide some potential adjustments that would deal with something that is invalid (and increment the m_invalid member variable)
+         //Age
+         string tempAge{};
+         getline(istr, tempAge, ',');
+         trim(tempAge);
+
+         bool containsNonDigit{};
+         for (int i = 0; i < tempAge.length() && !containsNonDigit; i++)
+         {
+            if (!isdigit(tempAge[i]))
+            {
+               containsNonDigit = true;
+               m_invalid++;
+               std::cerr << m_name << "++Invalid record!" << endl;
+            }
+
+         }
+         if (containsNonDigit == false)
+         {
+            m_age = tempAge;
+         }
+
+         //ID
+         string tempID{};
+         getline(istr, tempID, ',');
+         trim(tempID);
+         if (tempID[0] == 'E')
+         {
+            m_id = tempID;
+         }
+         else
+         {
+            m_invalid++;
+            std::cerr << m_name << "++Invalid record!" << endl;
+         }
+
+As seen above, all errors that were initially thrown is now removed. Instead, we increment m_invalid to indicate if an error has been encountered.
+
+3. In this workshop you had to use std::list<sdds::Person*> and std::vector<sdds::Person*> to store a collection of persons as pointers. Could you have used std::list<sdds::Person> and std::vector<sdds::Person> instead?
+
+No, it wouldn't have made sense because first of all, the Person class is an abstract base class and hence, cannot be instantiated by the College class. As a result, we will be unable to create a vector or list of type Person. On the other hand, it also just wouldn't make sense to do so. The reason for this is because if we did something like std::vector<sdds::Person>, it would mean we are wanting to create a vector with Person objects. If we have classes that inherits from the Person class (ie. Student, Employee), we would only be storing the "Person" portion of the Student object or Employee object into the vector or list, meaning the whole object of the Student or Employee won't even be properly stored. However, if we store Person* into the vector or list, when any of the virtual member functions (ie. status(), name(), age() etc...) are called, it will see the most recent version of that member function and resolve to the newest version. In essence, Person (base class) pointers allows to "see" the Student or Employee's base portion (which is the Person portion) of the object, which will see that it is a "virtual" member function, and will call the most recent version of that method.
+
+
+
+

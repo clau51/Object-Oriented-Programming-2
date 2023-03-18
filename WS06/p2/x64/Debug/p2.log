@@ -1,0 +1,9 @@
+﻿  College.cpp
+  Employee.cpp
+  Professor.cpp
+  Student.cpp
+  Utilities.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p2\Utilities.cpp(45,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p2\Utilities.cpp(46,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  p2.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS06\p2\x64\Debug\p2.exe

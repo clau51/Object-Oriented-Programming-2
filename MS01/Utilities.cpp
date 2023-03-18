@@ -1,8 +1,16 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Mar 12, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #include "Utilities.h"
 
 namespace sdds
 {
-	char Utilities::m_delim = 0;
+	char Utilities::m_delimiter{};
 
 	void Utilities::setFieldWidth(size_t newWidth)
 	{
@@ -12,7 +20,15 @@ namespace sdds
 	std::string Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more)
 	{
 		std::string tempString{};
-		size_t pos = str.find(m_delim, next_pos); //position at the comma
+
+		if (str[next_pos] == m_delimiter)
+		{
+			more = false;
+			throw std::string("No token found"); //throw an error
+		}
+
+		size_t pos = str.find(m_delimiter, next_pos); //position at the comma
+
 		if (pos == std::string::npos) {
 			more = false;
 			tempString = str.substr(next_pos);
@@ -38,29 +54,29 @@ namespace sdds
 
 	char Utilities::getDelimiter()
 	{
-		return m_delim;
+		return m_delimiter;
 	}
 
 	std::string& Utilities::trim(std::string& s)
 	{
 		int first = s.find_first_not_of(' ');
 		int last = s.find_last_not_of(' ');
-		//if (first != -1 && last != -1)
-		//{
+		if (first != -1 && last != -1)
+		{
 		s.erase(0, first);
 		s.erase(last + 1 - first);
-		//}
-		//else
-		//{
-		//   throw "Out of range";
-		//}
+		}
+		else
+		{
+		   throw std::string("Out of range");
+		}
 		return s;
 
 	}
 
 	void Utilities::setDelimiter(char newDelimiter)
 	{
-		m_delim = newDelimiter;
+		m_delimiter = newDelimiter;
 	}
 
 }

@@ -1,4 +1,18 @@
 ﻿  Bakery.cpp
-C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.h(29,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.h(30,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.cpp(166,43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.cpp(167,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\numeric(25): warning C4267: '=': conversion from 'size_t' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\Bakery.cpp(77,11): message : see reference to function template instantiation '_Ty std::accumulate<std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<sdds::BakedGood>>>,int,sdds::Bakery::showGoods::<lambda_2>>(const _InIt,const _InIt,_Ty,_Fn)' being compiled
+          with
+          [
+              _Ty=int,
+              _InIt=std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<sdds::BakedGood>>>,
+              _Fn=sdds::Bakery::showGoods::<lambda_2>
+          ]
+  w7_p2.cpp
+  Generating Code...
   p2.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS07\p2\x64\Debug\p2.exe

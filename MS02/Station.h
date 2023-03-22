@@ -1,10 +1,9 @@
 //Name: Carmen Lau
 //Student ID: 166689216
 //Email: clau51@myseneca.ca
-//Date: Mar 12, 2023
+//Date: Mar 18, 2023
 //Section: NDD
 //I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
-
 
 #ifndef SDDS_STATION_H_
 #define SDDS_STATION_H_

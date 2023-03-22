@@ -1,7 +1,7 @@
 //Name: Carmen Lau
 //Student ID: 166689216
 //Email: clau51@myseneca.ca
-//Date: Mar 12, 2023
+//Date: Mar 18, 2023
 //Section: NDD
 //I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 
@@ -37,11 +37,11 @@ namespace sdds
 			more = true;
 			next_pos = pos + 1;
 		}
-		trim(tempString);
-
 		if (m_widthField < tempString.length()) {
 			m_widthField = tempString.length();
 		}
+		trim(tempString);
+
 
 		return tempString;
 	}

@@ -1,3 +1,10 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Mar 18, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
 #ifndef SDDS_BAKERY_H_
 #define SDDS_BAKERY_H_
 #include <string>
@@ -24,23 +31,14 @@ namespace sdds
    class Bakery
    {
       std::vector<BakedGood> m_bakedGoods{};
-      std::string& trim(std::string& s)
-      {
-         int first = s.find_first_not_of(' ');
-         int last = s.find_last_not_of(' ');
-
-         s.erase(0, first);
-         s.erase(last + 1 - first);
-         return s;
-
-      }
+      std::string& trim(std::string& s);
    public:
       Bakery(const std::string& filename);
       void showGoods(std::ostream& os) const;
       void sortBakery(const std::string& field);
-      std::vector<BakedGood> combine( Bakery& bakery);
-      bool inStock(const std::string& description, BakedType bakedType) const;
-      std::list<BakedGood> outOfStock(BakedType bakedType) const;
+      std::vector<BakedGood> combine(Bakery& bakery);
+      bool inStock(const std::string& description, const BakedType& bakedType) const;
+      std::list<BakedGood> outOfStock(const BakedType& bakedType) const;
    };
 
    std::ostream& operator<<(std::ostream& out, const BakedGood& b);

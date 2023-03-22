@@ -1,11 +1,14 @@
 //Name: Carmen Lau
 //Student ID: 166689216
 //Email: clau51@myseneca.ca
-//Date: Mar 12, 2023
+//Date: Mar 18, 2023
 //Section: NDD
 //I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 
 #include <string>
+#include <vector>
+#include <iostream>
+#include <iomanip>
 #include "CustomerOrder.h"
 #include "Utilities.h"
 
@@ -22,16 +25,26 @@ namespace sdds
       m_name = utils.extractToken(s, position, more);
       m_product = utils.extractToken(s, position, more);
 
-      m_lstItem = new Item* [m_cntItem];
-      while(more)
+      vector<string> tempItems;
+      while (more)
       {
-         m_lstItem[m_cntItem++] = new Item(utils.extractToken(s, position, more));
+         tempItems.push_back(utils.extractToken(s, position, more));
+         m_cntItem++;
+
+         if (m_widthField < utils.getFieldWidth())
+         {
+            m_widthField = utils.getFieldWidth();
+         }
       }
 
-      if (CustomerOrder::m_widthField < utils.getFieldWidth())
+      m_lstItem = new Item* [m_cntItem]; //new Item*[0]
+
+      for (size_t i = 0; i < m_cntItem; i++)
       {
-         CustomerOrder::m_widthField = utils.getFieldWidth();
+         m_lstItem[i] = new Item(tempItems[i]);
       }
+
+
    }
    CustomerOrder::CustomerOrder(const CustomerOrder& customerOrder)
    {
@@ -63,7 +76,7 @@ namespace sdds
          m_cntItem = customerOrder.m_cntItem;
          customerOrder.m_cntItem = 0;
 
-         m_widthField = customerOrder.m_widthField; //do i need this?
+         //m_widthField = customerOrder.m_widthField; //do i need this?
       }
 
       return *this;
@@ -110,32 +123,43 @@ namespace sdds
    }
    void CustomerOrder::fillItem(Station& station, std::ostream& os)
    {
-      //An order can have multiple items..
-      //A station works on one item at a time
-      for (size_t i = 0; i < m_cntItem; i++)
+      bool filled{};
+      for (size_t i = 0; i < m_cntItem && !filled; i++)
       {
-         if (station.getItemName() == m_lstItem[m_cntItem]->m_itemName)
+         if (station.getItemName() == m_lstItem[i]->m_itemName && station.getQuantity() > 0)
          {
+            station.updateQuantity();
+            m_lstItem[i]->m_isFilled = true;
+            station.getNextSerialNumber(); //???
+            filled = true;
 
+            if (m_lstItem[i]->m_isFilled)
+            {
+               os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << endl;
+            }
+         }
+         else if (station.getItemName() == m_lstItem[i]->m_itemName && station.getQuantity() == 0)
+         {
+            os << "    Unable to fill " << m_name << ", " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << endl;
          }
       }
 
    }
    void CustomerOrder::display(std::ostream& ost) const
    {
+      ost << m_name << " - " << m_product << endl;
+      for (size_t i = 0; i < m_cntItem; i++)
+      {
+         ost << "[" << setw(6) << setfill('0') << m_lstItem[i]->m_serialNumber << "]" << " " << setfill(' ');
+         ost << setw(m_widthField) << left << m_lstItem[i]->m_itemName << " -";
+         if (m_lstItem[i]->m_isFilled)
+         {
+            ost << " FILLED" << endl;
+         }
+         else
+         {
+            ost << " TO BE FILLED" << endl;
+         }
+      }
    }
 }
-
-
-
-
-
-
-//
-//if (station.getItemName() == m_lstItem[0]->m_itemName)
-//{
-//   station.updateQuantity();
-//   m_lstItem[0]->m_serialNumber = station.getNextSerialNumber();
-//   m_lstItem[0]->m_isFilled = true;
-//   os << "    Filled " << m_name << ", " << m_product << " [" << m_lstItem[0]->m_itemName << "]" << endl;
-//}

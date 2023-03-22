@@ -1,1 +1,49 @@
-reflect
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Mar 18, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+1. List all the STL functions that you have used in this workshop; explain your reasoning for choosing each one, and not another.
+
+a) std::for_each()
+
+This algorithm is best used when we don't need to modify elements in a container. When applied in my workshop, I used it in the showGoods() member function to display each individual element in m_bakedGoods.
+
+b) std::accumulate()
+
+This algorithm is best used when we want to calculate a sum or an accumulation of elements in a container. When applied in my workshop, I used it in the showGoods() member function to find the total sum of the stock and the total sum of the price. Since m_bakedGoods has a m_stock and m_price of type size_t, this algorithm was best suited to help me calculate the total of m_price/m_stock of all the elements in the vector.
+
+c) std::sort()
+
+This algorithm is best used to sort a container in descending or ascending order. This algorithm was used in my sortBakery() member function() in alphabetical or numeric order depending on the field. The lambda function in the third parameter is used to determine the order of the elements in the range, so the lambda function actually determines whether it is sorted in ascending or descending order.
+
+d) std::merge()
+
+This algorithm is best suited when we need to combine two sorted containers in a given range into one sorted container. This algorithm was used in my combine() member function to combine the Bakery object reference to the current collection of BakedGoods of the current object, making it a single collection of BakedGoods. This would probably be the easiest way to achieve the intended result, though I did encounter some issues in the beginning since I did not provide merge() with a SORTED container. 
+
+e) std::any_of
+
+This algorithm is best suited when we need to check if any elements in the container satisfies a condition which is checked in the lambda function (third parameter of the any_of algo). I used this algorithm in my inStock() member function to check if the collection contains stock of a specific BakedGood. This was done through the lambda function where it checked if the current collection matched the incoming description and bakedType as well as the if the stock was > 0. If all is true, it would mean that it is in stock. If nothing in the collection matched the conditions, false would be returned. On the other hand, if the algo loops through a single element of the container that matches the condition, it would just exit the loop and return true preventing from looping through the whole container (we can exit once we know it exists once).
+
+f) std::copy_if()
+This algorithm is used to copy a subset of the elements in a range to another container. It takes a range, a destination iterator, and a unary predicate, and copies the elements that satisfy the predicate to the destination iterator. It is useful when you need to extract a subset of the elements in a container that meet a certain condition
+
+This algorithm is best used if we want to copy in part or all of the elements from a container into destination container that satisfies the lambda function. In the workshop, we want to return a list of out of stock items in the collection. If the condition is satisfied (if stock == 0 and bakedType == bakedGood.m_bakedType) in the lambda function, it would insert the element into the new container.
+
+2. Present the advantages of using STL algorithms vs. implementing the functionality by yourself using loops.
+
+There are many advantages to using STL algorithms vs implementing the functionality by us using loops. It is easier to use, read and maintain, less prone to errors and faster. Instead of having to manually manipulate an array and implement logic, the STL functions already has that logic available for use. For example, we were required to manually sort functions using loops and if conditions in many instances. However, this is not only tedious, but why go through the hassle if it is already available in the STL libraries? Not only that, but it also opens doors to potential issues such as bugs and errors such as the off by one error as well as other logical errors. Additionally, instead of having to look at a whole block of code trying to understand what it's trying to do, we can easily just use the sort() STL function and pass in the correct parameters for it to do its work for us. Lastly, if we handle manual loops, we may reduce efficiency as we may add extra code that isn't necessary. Using the STL functions will likely optimize our code for performance since has likely been tested and optimized. Overall, the biggest question is, why go through hurdles if you can just take the easy way out?
+
+3. For the sortBakery function, would anything differ in how it is implemented if the choice of collection was either a vector or a list? If there is a difference what is it?
+
+If the collection was a list, it would vary slightly in that we would use the member function called "sort" to sort the list as opposed to our current implementation where we're using the "sort" manipulator whereby we pass in the beginning random access iterator and ending random access iterator. Elements in a list are not contiguous in memory, and because of the way it’s laid out, it’s not as efficient to query each individual index. Each element in a list will have a "previous" and a "next" pointer that points to the previous and next elements, so unlike a vector, using .begin() and adding a number would not provide access to the element that you want to access. Instead, we would likely be using the pointers to access the next or previous elements. As a result, the manipulator that is indicated by void sort(RandomAccessIterator f, RandomAccessIterator l, Fn compare) would not be the choice for a list.
+An example for a list would be rewritten as follows:
+    if (field == "Description")
+    {
+        m_bakedGoods.sort([](const auto& goods1, const auto& goods2) {
+            return goods1.m_description < goods2.m_description;
+        });
+    }
+The "sort" member function is used and as seen, no RandomAccessIterators are used.

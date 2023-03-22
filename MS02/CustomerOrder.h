@@ -1,3 +1,11 @@
+//Name: Carmen Lau
+//Student ID: 166689216
+//Email: clau51@myseneca.ca
+//Date: Mar 18, 2023
+//Section: NDD
+//I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+
+
 #ifndef SDDS_CUSTOMERORDER_H_
 #define SDDS_CUSTOMERORDER_H_
 
@@ -25,7 +33,7 @@ namespace sdds
       Item** m_lstItem{};
       static size_t m_widthField;
    public:
-      CustomerOrder();
+      CustomerOrder() = default;
       CustomerOrder(const std::string& s);
       CustomerOrder(const CustomerOrder& customerOrder);
       CustomerOrder& operator=(const CustomerOrder& customerOrder) = delete;

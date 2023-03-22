@@ -1,0 +1,8 @@
+﻿  w8_p2.cpp
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(169,46): warning C4244: '=': conversion from '__int64' to 'char', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(67,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(66,1): message : while compiling class template member function 'std::string &sdds::Database<__int64>::trim(std::string &)'
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(48,20): message : see reference to function template instantiation 'std::string &sdds::Database<__int64>::trim(std::string &)' being compiled
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(159,44): message : see reference to class template instantiation 'sdds::Database<__int64>' being compiled
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\Database.h(68,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  p2.vcxproj -> C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\x64\Debug\p2.exe

@@ -1,7 +1,3 @@
-﻿  w8_p2.cpp
-C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\Database.h(84,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\Database.h(83): message : while compiling class template member function 'std::string &sdds::Database<__int64>::trim(std::string &)'
-C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\Database.h(44): message : see reference to function template instantiation 'std::string &sdds::Database<__int64>::trim(std::string &)' being compiled
-C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\Database.h(168): message : see reference to class template instantiation 'sdds::Database<__int64>' being compiled
-C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\Database.h(85,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  p2.vcxproj -> C:\Users\Shoyr\OneDrive\Desktop\Seneca Sem 3\OOP345Works\WS08\p2\x64\Debug\p2.exe
+﻿w8_p2.obj : error LNK2001: unresolved external symbol "private: static class std::shared_ptr<class sdds::Database<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > > > sdds::Database<class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > >::m_addr" (?m_addr@?$Database@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@sdds@@0V?$shared_ptr@V?$Database@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@sdds@@@std@@A)
+w8_p2.obj : error LNK2001: unresolved external symbol "private: static class std::shared_ptr<class sdds::Database<__int64> > sdds::Database<__int64>::m_addr" (?m_addr@?$Database@_J@sdds@@0V?$shared_ptr@V?$Database@_J@sdds@@@std@@A)
+C:\Users\Shoyr\Desktop\OOP345\OOP345Works\WS08\p2\x64\Debug\p2.exe : fatal error LNK1120: 2 unresolved externals

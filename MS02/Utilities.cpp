@@ -26,7 +26,7 @@ namespace sdds
 			more = false;
 			throw "No token found";
 		}
-		size_t pos = str.find(m_delim, next_pos); //position at the comma
+		size_t pos = str.find(m_delim, next_pos); //position at the delim
 
 		if (pos == std::string::npos) {
 			more = false;
@@ -60,15 +60,8 @@ namespace sdds
 	{
 		int first = s.find_first_not_of(' ');
 		int last = s.find_last_not_of(' ');
-		//if (first != -1 && last != -1)
-		//{
 		s.erase(0, first);
 		s.erase(last + 1 - first);
-		//}
-		//else
-		//{
-		//   throw "Out of range";
-		//}
 		return s;
 
 	}

@@ -37,7 +37,7 @@ namespace sdds
          }
       }
 
-      m_lstItem = new Item* [m_cntItem]; //new Item*[0]
+      m_lstItem = new Item* [m_cntItem];
 
       for (size_t i = 0; i < m_cntItem; i++)
       {
@@ -75,8 +75,6 @@ namespace sdds
 
          m_cntItem = customerOrder.m_cntItem;
          customerOrder.m_cntItem = 0;
-
-         //m_widthField = customerOrder.m_widthField; //do i need this?
       }
 
       return *this;
@@ -130,7 +128,7 @@ namespace sdds
          {
             station.updateQuantity();
             m_lstItem[i]->m_isFilled = true;
-            station.getNextSerialNumber(); //???
+            station.getNextSerialNumber(); 
             filled = true;
 
             if (m_lstItem[i]->m_isFilled)

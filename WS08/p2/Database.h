@@ -1,187 +1,197 @@
-#ifndef SDDS_DATABASE_H_
-#define SDDS_DATABASE_H_
-#include <memory>
-#include <string>
+#ifndef SDDS_DATABASE_H
+#define SDDS_DATABASE_H
+
 #include <iostream>
 #include <fstream>
-#include <algorithm>
 #include <iomanip>
-#include <sstream>
-#include <cstring>
+#include <memory>
+#include <string>
+
+
+
 namespace sdds
 {
-	const int MAX_CAPACITY = 20;
+   const int ARR_SIZE = 20;
+   enum class Err_Status
+   {
+      Err_Success,
+      Err_NotFound,
+      Err_OutOfMemory,
+   };
+   //singleton = only one instance of the class is allowed for the whole program
+   //class Database {
+   //   static std::shared_ptr<Database> m_addr; //reflection
+   //   size_t m_num_entry{};
+   //   std::string m_keys[ARR_SIZE];
+   //   std::string m_values[ARR_SIZE];
+   //   std::string m_filename{};
+   ////protected: or private?
+   //   Database() {};
+   //   Database(const std::string& filename);
+   //public:
+   //   static std::shared_ptr<Database> getInstance(const std::string& filename);
+   //   Err_Status GetValue(const std::string& key, std::string& value) const;
+   //   Err_Status SetValue(const std::string& key, std::string& value);
+   //   ~Database();
 
-	enum class Err_Status
-	{
-		Err_Success,
-		Err_NotFound,
-		Err_OutOfMemory,
-	};
+   //};
+   template<class T>
+   class Database
+   {
+      static std::shared_ptr<Database> m_addr; //reflection
+      size_t m_num_entry{};
+      std::string m_keys[ARR_SIZE];
+      T m_values[ARR_SIZE];
+      std::string m_filename{};
+      //protected: or private?
+      Database()
+      {
+      };
+      Database(const std::string& filename)
+      {
+         //hex style for the address
+         std::cout << "[" << this << "]" << " Database(const std::string&)" << std::endl;
+         m_filename = filename;
 
-	template<typename T>
-	class Database
-	{
-		size_t m_entries{};
-		std::string m_key[MAX_CAPACITY]{};
-		T m_value[MAX_CAPACITY]{};
-		std::string m_filename{};
-		static std::shared_ptr<Database<T>> instancePtr;
-		Database(const std::string& filename)
-		{
-			std::cout << std::hex;
-			std::cout << "[" << this << "] Database(const std::string&)" << std::endl;
+         std::ifstream file(filename);
 
-			std::ifstream file(filename);
-			if (file)
-			{
-				m_filename = filename;
-				std::string tempKey{};
-				T tempValue{};
+         size_t i{};
 
-				while (file.peek() != EOF) {
-					file >> tempKey;
-					trim(tempKey);
-					//std::stringstream ss1(tempKey);
-					file >> tempValue;
-					//trim(tempValue);
-					//std::stringstream ss2(tempValue);
-					m_key[m_entries] = tempKey;
-					replace(m_key[m_entries].begin(), m_key[m_entries].end(), '_', ' ');
-					m_value[m_entries] = tempValue;
-					//m_key[m_entries] = tempKey;
-					//m_value[m_entries] = tempValue;
-					encryptDecrypt(m_value[m_entries]);
+         while (i < ARR_SIZE && (file >> m_keys[i] && file >> m_values[i]))
+         {
+            size_t pos = m_keys[i].find_first_of("_");
 
-					m_entries++;
-				}
-				//while (getline(file, tempString))
-				//{
+            if (pos != std::string::npos)
+               m_keys[i].replace(pos, 1, " ");
 
-				//   pos = tempString.find_first_of(' ');
-				//   tempKey = tempString.substr(0, pos);
-				//   trim(tempKey);
-				//   tempValue = tempString.substr(pos + 1, tempString.length());
-				//   trim(tempValue);
+            encryptDecrypt(m_values[i]);
 
-				//   std::stringstream tv(tempValue);
-				//   T tval{};
-				//   tv >> tval;
+            i++;
+         }
+         m_num_entry = i + 1;
+      };
 
-				//   replace(tempKey.begin(), tempKey.end(), '_', ' ');
+      void encryptDecrypt(T& value)
+      {
+      };
 
-				//   m_key[m_entries] = tempKey;
-				//   m_value[m_entries] = tval;
-				//   m_entries++;
-				//}
+   public:
+      static std::shared_ptr<Database> getInstance(const std::string& filename)
+      {
+         if (!m_addr)
+         {
+            m_addr = std::shared_ptr<Database>(new Database<T>(filename)); //shared pointer allows copy
+         }
 
+         return m_addr;
+      }
+      Err_Status GetValue(const std::string& key, T& value) const
+      {
+         bool found{};
+         Err_Status status;
+         auto i = 0u;
+         for (; i < m_num_entry && !found; i++)
+         {
+            found = m_keys[i] == key;
+         }
 
-			}
+         if (found && i--)
+         {
+            value = m_values[i];
+            status = Err_Status::Err_Success;
+         }
+         else
+         {
+            status = Err_Status::Err_NotFound;
+         }
+         return status;
 
-		}
-		std::string& trim(std::string& s)
-		{
-			int first = s.find_first_not_of(' ');
-			int last = s.find_last_not_of(' ');
+      };
+      Err_Status SetValue(const std::string& key, const T& value)
+      {
+         Err_Status status;
 
-			s.erase(0, first);
-			s.erase(last + 1 - first);
-			return s;
-		}
+         if (m_num_entry < ARR_SIZE)
+         {
+            m_keys[m_num_entry - 1] = key;
+            m_values[m_num_entry - 1] = value;
+            status = Err_Status::Err_Success;
+         }
+         else
+         {
+            status = Err_Status::Err_OutOfMemory;
+         }
 
-		void encryptDecrypt(T& value)
-		{
-		};
-
-
-	public:
-		static std::shared_ptr<Database<T>> getInstance(const std::string& filename)
-		{
-			return instancePtr ? instancePtr : instancePtr = std::shared_ptr<Database<T>>(new Database<T>(filename));
-		}
-		Err_Status GetValue(const std::string& key, T& value)
-		{
-			bool ok{};
-			for (size_t i = 0; i < m_entries && !ok; i++)
-			{
-				if (m_key[i] == key)
-				{
-					//encryptDecrypt(value);
-					value = m_value[i];
-					ok = true;
-				}
-			}
-			return ok ? Err_Status::Err_Success : Err_Status::Err_NotFound;
-		}
-
-		Err_Status SetValue(const std::string& key, const T& value)
-		{
-			bool added{};
-			if (m_entries < MAX_CAPACITY)
-			{
-				m_key[m_entries] = key;
-				m_value[m_entries] = value;
-				m_entries++;
-				added = true;
-			}
-			return added ? Err_Status::Err_Success : Err_Status::Err_OutOfMemory;
-		}
-
-		~Database()
-		{
-			for (size_t i = 0; i < m_entries; i++)
-			{
-				std::cout << m_key[i] << " earned " << m_value[i] << std::endl;
-			}
-
-			std::cout << std::hex;
-			std::cout << "[" << instancePtr << "] ~Database()" << std::endl; //or this?
-
-			encryptDecrypt(m_value[0]);
-			std::ofstream file(m_filename + ".bkp.txt");
-			for (size_t i = 0; i < m_entries; i++)
-			{
-				file << std::setw(25) << std::left << m_key[i] << "-> " << m_value[i] << std::endl;
-			}
-
-		}
-	};
-
-	template <typename T>
-	std::shared_ptr<Database<T>> Database<T>::instancePtr{};
-
-	template<>
-	void Database<std::string>::encryptDecrypt(std::string& value) //hello
-	{
-		const char secret[]{ "secret encryption key" };
-
-		for (size_t i = 0; i < value.length(); i++)
-		{
-			for (size_t j = 0; j < std::strlen(secret); j++)
-			{
- 				value[i] = value[i] ^ secret[j];
-			}
-		}
-	}
-
-	template<>
-	void Database<long long>::encryptDecrypt(long long& value)
-	{
-		const char secret[]{ "super secret encryption key" };
-		size_t sz = sizeof(value);
-		char* individualByte = reinterpret_cast<char*>(&value);
-
-		for (size_t i = 0; i < sz; i++)
-		{
-			for (size_t j = 0; j < std::strlen(secret); j++) {
-				individualByte[i] = individualByte[i] ^ secret[j];
-			}
-		}
-
-	}
+         return status;
+      };
 
 
+
+      ~Database()
+      {
+         std::cout << "[" << this << "]" << " ~Database()" << std::endl;
+         std::string bkpFilename = m_filename + ".bkp.txt";
+         std::ofstream file(bkpFilename);
+
+         if (file)
+         {
+            for (auto i = 0u; i < m_num_entry; i++)
+            {
+               encryptDecrypt(m_values[i]);
+               file << std::setw(25) << std::left << m_keys[i]
+                  << "-> " << m_values[i] << std::endl;
+            }
+         }
+
+      };
+
+   };
+   template <typename T>
+   static std::shared_ptr<Database<T>> m_addr{}; //reflection
+
+
+
+   template<>
+   void Database<std::string>::encryptDecrypt(std::string& value)
+   {
+      const char secret[]{ "secret encryption key" };
+      for (char& C : value)
+      {
+         for (const char& K : secret)
+         {
+            C = C ^ K;
+         }
+      }
+   }
+
+   template<>
+   void Database<long long>::encryptDecrypt(long long& value)
+   {
+      const char secret[]{ "secret encryption key" };
+
+      // value is a long long
+      char* c = reinterpret_cast<char*>(&value);
+
+      for (auto i = 0u; i < sizeof(value); i++)
+      {
+         for (auto j = 0u; j < strlen(secret); j++)
+         {
+            c[i] = c[i] ^ secret[j];
+         }
+         /* for (const char& K : secret) {
+             c[i] = c[i] ^ K;
+          }*/
+      }
+   }
 }
 
-#endif
+
+
+
+
+
+
+
+#endif // !SDDS_DATABASE_H
+
 

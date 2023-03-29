@@ -1,0 +1,26 @@
+4 Nighttable|Desk
+2 Dresser|Armchair
+7 Filing Cabinet|Bookcase
+8 Bookcase
+1 Bed|Dresser
+6 Office Chair|Filing Cabinet
+3 Armchair|Nighttable
+5 Desk|Office Chair
+
+4 Nighttable
+2 Dresser
+7 Filing Cabinet
+8 Bookcase
+1 Bed
+6 Office Chair
+3 Armchair
+5 Desk
+
+Bed
+Dresser
+Armchair
+Nighttable
+Desk
+Office Chair
+Filing Cabinet
+Bookcase
